@@ -4,89 +4,50 @@ description: Use CapSolver to automatically resolve Geetest, reCAPTCHA v2, reCAP
 homepage: https://capsolver.com/
 credentials:
   - API_KEY
-  - env:
-  -   required:
-  -       - API_KEY
-  -   metadata:
-  -     author: capsolver
-  -   version: "1.0.0"
-  -   ---
+env:
+  required:
+    - API_KEY
+metadata:
+  author: capsolver
+  version: "1.0.0"
+---
 
-  # CapSolver Skill
+# CapSolver Skill
 
-  Use this skill to automatically resolve various CAPTCHA challenges using the CapSolver API service.
+Use this skill to automatically resolve various CAPTCHA challenges using the CapSolver API service.
 
-  **Authentication:** Set `API_KEY` in your environment or in a `.env` file in the repo root. Get your key from the [CapSolver Dashboard](https://dashboard.capsolver.com/).
+**Authentication:** Set `API_KEY` in your environment or in a `.env` file in the repo root. Get your key from the [CapSolver Dashboard](https://dashboard.capsolver.com/).
 
-  **Errors:** If it fails, the script will exit with code 1.
+**Errors:** If it fails, the script will exit with code 1.
 
-  ## Supported Captcha Types
+## Supported Captcha Types
 
-  ### Task (Recognition)
+### Task (Recognition)
 
-  - **ImageToTextTask** — Solve text-based captcha from images
-  - - **ReCaptchaV2Classification** — Classify reCAPTCHA v2 images
-    - - **AwsWafClassification** — Classify AWS WAF images
-      - - **VisionEngine** — Advanced AI vision-based captcha solving
-       
-        - ### Task (Token)
-       
-        - - **GeeTest** — Solve GeeTest v3/v4
-          - - **reCAPTCHA v2** — Solve Google reCAPTCHA v2 (checkbox/invisible)
-            - - **reCAPTCHA v3** — Solve Google reCAPTCHA v3
-              - - **MTCaptcha** — Solve MTCaptcha
-                - - **DataDome** — Solve DataDome slider
-                  - - **AWS WAF** — Solve AWS WAF challenges
-                    - - **Cloudflare Turnstile** — Solve Cloudflare Turnstile
-                      - - **Cloudflare Challenge** — Solve Cloudflare 5-second shield
-                       
-                        - ## Usage
-                       
-                        - ### Recognition Tasks
-                       
-                        - ```bash
-                          # ImageToText
-                          python3 ./scripts/solver.py ImageToTextTask --body "base64_image_data"
-                          python3 ./scripts/solver.py ImageToTextTask --body "base64_image_data" --module "module_001"
+- **ImageToTextTask** -- Solve text-based captcha from images
+- **ReCaptchaV2Classification** -- Classify reCAPTCHA v2 images
+- **AwsWafClassification** -- Classify AWS WAF images
+- **VisionEngine** -- Advanced AI vision-based captcha solving
 
-                          # ReCaptchaV2 Classification
-                          python3 ./scripts/solver.py ReCaptchaV2Classification --question "question" --image "base64_image_data"
+### Task (Token)
 
-                          # AWS WAF Classification
-                          python3 ./scripts/solver.py AwsWafClassification --question "question" --images "img1" "img2" "img3"
+- **GeeTest** -- Solve GeeTest v3/v4
+- **reCAPTCHA v2** -- Solve Google reCAPTCHA v2 (checkbox/invisible)
+- **reCAPTCHA v3** -- Solve Google reCAPTCHA v3
+- **MTCaptcha** -- Solve MTCaptcha
+- **DataDome** -- Solve DataDome slider
+- **AWS WAF** -- Solve AWS WAF challenges
+- **Cloudflare Turnstile** -- Solve Cloudflare Turnstile
+- **Cloudflare Challenge** -- Solve Cloudflare 5-second shield
 
-                          # VisionEngine
-                          python3 ./scripts/solver.py VisionEngine --module "module" --image "base64_image_data" --imageBackground "base64_bg_data"
-                          ```
+## Usage
 
-                          ### Token Tasks
+See the README for full usage examples, or run:
 
-                          ```bash
-                          # GeeTest v4
-                          python3 ./scripts/solver.py GeeTestTaskProxyLess --websiteURL "https://example.com/" --captchaId "captcha_id"
+```bash
+python3 ./scripts/solver.py --help
+```
 
-                          # reCAPTCHA v2
-                          python3 ./scripts/solver.py ReCaptchaV2TaskProxyLess --websiteURL "https://example.com" --websiteKey "site_key"
+## Resources
 
-                          # reCAPTCHA v3
-                          python3 ./scripts/solver.py ReCaptchaV3TaskProxyLess --websiteURL "https://example.com" --websiteKey "site_key"
-
-                          # MTCaptcha
-                          python3 ./scripts/solver.py MtCaptchaTaskProxyLess --websiteURL "https://example.com" --websiteKey "site_key"
-
-                          # DataDome
-                          python3 ./scripts/solver.py DatadomeSliderTask --captchaUrl "https://geo.captcha-delivery.com/xxx" --userAgent "Mozilla/5.0 ..." --proxy "host:port:user:pass"
-
-                          # AWS WAF
-                          python3 ./scripts/solver.py AntiAwsWafTaskProxyLess --websiteURL "https://example.com"
-
-                          # Cloudflare Turnstile
-                          python3 ./scripts/solver.py AntiTurnstileTaskProxyLess --websiteURL "https://example.com" --websiteKey "site_key"
-
-                          # Cloudflare Challenge
-                          python3 ./scripts/solver.py AntiCloudflareTask --websiteURL "https://example.com" --proxy "host:port:user:pass"
-                          ```
-
-                          ## Resources
-
-                          - [CapSolver Docs](https://docs.capsolver.com/) — Official documentation
+- [CapSolver Docs](https://docs.capsolver.com/) -- Official documentation
